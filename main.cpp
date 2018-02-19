@@ -9,6 +9,7 @@ FEHMotor left_motor(FEHMotor::Motor0,9.0);
 FEHMotor right_motor(FEHMotor::Motor1,9.0);
 DigitalInputPin leftFrontMicro(FEHIO::P0_0);
 DigitalInputPin rightFrontMicro(FEHIO::P0_1);
+AnalogInputPin CdS_Cell(FEHIO::P1_0);
 
 //Write function prototypes
 void performanceTest(void);
@@ -23,31 +24,19 @@ int main(void)
 
     performanceTest();
 
-
-    float x,y;
-
-    LCD.Clear( FEHLCD::Black );
-    LCD.SetFontColor( FEHLCD::White );
-
-    while( true )
-    {
-        if( LCD.Touch(&x,&y) )
-        {
-            LCD.WriteLine( "Hello World!" );
-            Sleep( 100 );
-        }
-    }
-    return 0;
 }
 
 void performanceTest(void){
+    //If no light, do nothing a.k.a. start on light
+    while (CdS_Cell.Value() > .5) {}
+   
     //Go forward
     moveTime(1,1,1);
 
     //Turn Right
     moveTime(34,5,6);
 
-    //Go formward
+    //Go forward
     moveTime(4,5,5);
 
     //Turn left
