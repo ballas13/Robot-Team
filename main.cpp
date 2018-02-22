@@ -80,7 +80,7 @@ void performanceTest(void){
     //Move backwards
     moveTime(-1*MainMotorPower, -1*MainMotorPower, 2.5);
 
-    /*
+    
     //Turn Left
     moveTime(Zero,-1*MainMotorPower,0.6);
 
